@@ -6,7 +6,6 @@ x 2021-05-03 delete +commands
 x 2021-05-02 prioritise +commands
 x 2021-05-02 deprioritise +commands
 x 2021-05-04 report +commands
-x 2021-05-03 help / shorthelp +commands
 (C) Everything relating to contexts and projects
 (A) Sorting and filtering of the task list
 (B) Multiple files? (not really necessary, apart from done.txt because it's in the standard)
