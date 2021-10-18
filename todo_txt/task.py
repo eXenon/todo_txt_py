@@ -33,6 +33,10 @@ class Task:
             self.completed = date.today()
             self.unset_priority()
 
+    def matches(self, keyword: str) -> bool:
+        # TODO improve with proper regexp handling
+        return keyword in self.description
+
     def set_priority(self, priority: str):
         self.priority = priority
 

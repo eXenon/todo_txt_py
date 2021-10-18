@@ -64,11 +64,15 @@ def cli(ctx, todo_file):
 
 @cli.command()
 @click.pass_context
-def list(ctx):
+@click.option('--show_completed/--hide_completed', required=False, default=False)
+@click.option('--search', type=click.STRING, required=False)
+def list(ctx, show_completed, search):
     """List all tasks"""
     tasks = read_tasks_from_file(ctx.obj['todo_file'])
-    for i, item in enumerate(tasks):
-        print(f"[{i}]: {str(item)}")
+    for i, task in enumerate(tasks):
+        if not task.completed or show_completed:
+            if not search or task.matches(search):
+                print(f"[{i}]: {str(task)}")
 
 
 @cli.command()
