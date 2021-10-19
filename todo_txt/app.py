@@ -19,10 +19,24 @@ def list_tasks(tasks: List[Task]):
         print(f"[{i}]: {str(item)}")
 
 
+def order_by(task: Task) -> int:
+    return ord(task.priority)
+    
+
+
 def read_tasks_from_file() -> List[Task]:
     with open(todo_file, "r") as file:
         lines = file.readlines()
-    return [Task(line) for line in lines]
+
+    tasks_unordered = [Task(line) for line in lines]
+    completed_tasks = [t for t in tasks_unordered if t.completed]
+    uncompleted_tasks = [t for t in tasks_unordered if not t.completed and t.priority]
+    uncompleted_tasks_without_priority = [t for t in tasks_unordered if not t.completed and not t.priority]
+    tasks_ordered: List[Task] = sorted(uncompleted_tasks, key=order_by)
+    tasks_ordered += uncompleted_tasks_without_priority
+    tasks_ordered += completed_tasks
+    return tasks_ordered
+    
 
 
 def write_tasks_to_file(tasks: List[Task]):
